@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.streamlit/
+yolov8n.pt
+*.csv
+uploads/
+crops/

@@ -1,0 +1,19 @@
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# Python caching
+__pycache__/
+*.py[cod]
+
+# Large ML Files (Weights/Datasets)
+*.pt
+*.pth
+*.weights
+uploads/
+crops/
+
+# OS files
+.DS_Store
+Thumbs.db
