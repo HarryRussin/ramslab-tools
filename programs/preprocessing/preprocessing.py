@@ -127,6 +127,7 @@ class PreprocessingGUI:
         candidate_dirs = [
             os.path.join(script_dir, "..", "data", "data"),
             os.path.join(script_dir, "..", "data"),
+            # os.path.join(script_dir, "enter any other dataset directories here"),
         ]
         image_extensions = {".png", ".jpg", ".jpeg", ".bmp", ".webp"}
 
