@@ -1,0 +1,5 @@
+
+best results with
+- canny edge detection
+- dilation k=3 iters=6
+- erosion k=3 iters=3
