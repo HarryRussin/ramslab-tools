@@ -1,0 +1,5 @@
+path: C:/Users/spamh/Documents/RAMSLAB/boundary_ml/data/synth
+train: images/train
+val: images/val
+nc: 1
+names: ['digit']

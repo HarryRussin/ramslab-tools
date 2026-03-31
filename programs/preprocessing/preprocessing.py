@@ -65,6 +65,7 @@ class PreprocessingGUI:
         self.current_image_path = None
         self.filter_pipeline = []
         self.dataset_images = []
+        self.dataset_search_paths = []
 
         self._build_ui()
         self._load_initial_image()
@@ -124,15 +125,17 @@ class PreprocessingGUI:
 
     def _collect_dataset_images(self):
         script_dir = os.path.dirname(os.path.abspath(__file__))
+        repo_root = os.path.normpath(os.path.join(script_dir, "..", ".."))
         candidate_dirs = [
+            os.path.join(repo_root, "data", "RAMS scoreboard data"),
             os.path.join(script_dir, "..", "data", "data"),
-            os.path.join(script_dir, "..", "data"),
-            # os.path.join(script_dir, "enter any other dataset directories here"),
+            os.path.join(repo_root, "programs", "data", "data"),
+            os.path.join(repo_root, "data"),
         ]
+        self.dataset_search_paths = [os.path.normpath(path) for path in candidate_dirs]
         image_extensions = {".png", ".jpg", ".jpeg", ".bmp", ".webp"}
 
-        for candidate in candidate_dirs:
-            candidate = os.path.normpath(candidate)
+        for candidate in self.dataset_search_paths:
             if not os.path.isdir(candidate):
                 continue
 
@@ -174,9 +177,10 @@ class PreprocessingGUI:
             self.dataset_images = self._collect_dataset_images()
 
         if not self.dataset_images:
+            searched_paths_text = "\n".join(self.dataset_search_paths)
             messagebox.showwarning(
                 "Data Folder Not Found",
-                "No images were found in the data folder.",
+                f"No images were found.\nSearched:\n{searched_paths_text}",
             )
             return
 
@@ -357,9 +361,12 @@ def main():
     root = tk.Tk()
     app = PreprocessingGUI(root)
     if app.original_image is None:
+        searched_paths_text = "\n".join(app.dataset_search_paths)
         messagebox.showinfo(
             "Info",
-            "No images found in the data folder and no default image found. Use 'Open Image' to load one.",
+            "No images found in the RAMS scoreboard dataset and no default image found. "
+            "Use 'Open Image' to load one.\n\n"
+            f"Searched:\n{searched_paths_text}",
         )
     root.mainloop()
 
